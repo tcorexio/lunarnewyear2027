@@ -1,0 +1,200 @@
+:root{
+  --red: #c8102e;
+  --red-dark: #8c0b21;
+  --gold: #ffd166;
+  --gold-deep: #e0a800;
+  --cream: #fff6e5;
+  --shadow: rgba(0,0,0,.25);
+}
+
+*{ box-sizing: border-box; }
+
+html,body{
+  margin:0;
+  padding:0;
+  min-height:100vh;
+  font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+  background: radial-gradient(circle at 50% -10%, #a80f2b 0%, #7a0c1f 45%, #4a0713 100%);
+  color: var(--cream);
+  overflow-x: hidden;
+}
+
+#fx-canvas{
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.wrap{
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 28px 16px 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.lanterns{
+  font-size: 2rem;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 480px;
+  margin-bottom: 8px;
+  animation: sway 3s ease-in-out infinite;
+}
+.lanterns span:nth-child(2n){ animation-delay: .4s; }
+@keyframes sway{
+  0%,100%{ transform: rotate(-6deg); }
+  50%{ transform: rotate(6deg); }
+}
+
+.header{ margin-bottom: 18px; }
+.blossom-title{ font-size: 1.6rem; margin-bottom: 4px; }
+
+h1{
+  font-size: clamp(1.4rem, 4.5vw, 2.2rem);
+  margin: 0 0 6px;
+  color: var(--gold);
+  text-shadow: 0 2px 6px var(--shadow);
+  font-weight: 800;
+  letter-spacing: .5px;
+}
+
+.subtitle{
+  margin: 0;
+  font-size: clamp(.85rem, 2.5vw, 1.05rem);
+  color: var(--cream);
+  opacity: .9;
+}
+
+.countdown-box{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: linear-gradient(160deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+  border: 2px solid var(--gold);
+  border-radius: 18px;
+  padding: 22px 14px;
+  margin: 18px 0;
+  width: 100%;
+  max-width: 560px;
+  box-shadow: 0 10px 30px var(--shadow), inset 0 0 30px rgba(255,209,102,.08);
+  backdrop-filter: blur(2px);
+}
+
+.unit{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 62px;
+}
+
+.value{
+  font-size: clamp(1.8rem, 7vw, 3rem);
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(180deg, var(--red), var(--red-dark));
+  border: 2px solid var(--gold);
+  border-radius: 12px;
+  padding: 6px 4px;
+  width: 100%;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+  box-shadow: 0 4px 0 var(--gold-deep), 0 6px 14px var(--shadow);
+}
+
+.label{
+  margin-top: 6px;
+  font-size: clamp(.7rem, 2vw, .9rem);
+  color: var(--gold);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.sep{
+  font-size: clamp(1.4rem, 5vw, 2.2rem);
+  font-weight: 800;
+  color: var(--gold);
+  padding-bottom: 22px;
+}
+
+.arrived-banner{
+  font-size: clamp(1rem, 4vw, 1.5rem);
+  font-weight: 800;
+  color: var(--gold);
+  background: rgba(0,0,0,.25);
+  border: 2px dashed var(--gold);
+  border-radius: 14px;
+  padding: 14px 18px;
+  margin-bottom: 18px;
+  animation: pulse 1.4s ease-in-out infinite;
+}
+.hidden{ display: none; }
+@keyframes pulse{
+  0%,100%{ transform: scale(1); }
+  50%{ transform: scale(1.04); }
+}
+
+.dates-card{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,209,102,.5);
+  border-radius: 16px;
+  padding: 16px 20px;
+  width: 100%;
+  max-width: 560px;
+  flex-wrap: wrap;
+}
+
+.date-item{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+}
+
+.date-icon{ font-size: 1.6rem; }
+
+.date-label{
+  font-size: .75rem;
+  opacity: .8;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+
+.date-value{
+  font-size: clamp(.95rem, 3vw, 1.15rem);
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.divider{
+  width: 1px;
+  height: 40px;
+  background: rgba(255,209,102,.4);
+}
+
+.footer{
+  margin-top: 26px;
+  font-size: .9rem;
+  opacity: .85;
+}
+
+@media (max-width: 420px){
+  .countdown-box{ gap: 2px; padding: 16px 8px; }
+  .unit{ min-width: 50px; }
+  .sep{ padding-bottom: 16px; }
+  .dates-card{ flex-direction: column; gap: 10px; }
+  .divider{ width: 80%; height: 1px; }
+}
