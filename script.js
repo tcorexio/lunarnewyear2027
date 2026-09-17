@@ -34,6 +34,7 @@
       elHours.textContent = "00";
       elMinutes.textContent = "00";
       elSeconds.textContent = "00";
+      document.title = "🎉 Chúc Mừng Năm Mới Đinh Mùi 2027!";
       return;
     }
 
@@ -47,17 +48,14 @@
     elHours.textContent = pad(hours);
     elMinutes.textContent = pad(minutes);
     elSeconds.textContent = pad(seconds);
+
+    document.title = `🧧 ${days} ngày ${pad(hours)}:${pad(minutes)}:${pad(seconds)} đến Tết 2027`;
   }
 
   // ---------- 2. NGÀY DƯƠNG LỊCH HIỆN TẠI ----------
   const WEEKDAYS_VI = [
-    "Chủ Nhật",
-    "Thứ Hai",
-    "Thứ Ba",
-    "Thứ Tư",
-    "Thứ Năm",
-    "Thứ Sáu",
-    "Thứ Bảy",
+    "Chủ Nhật", "Thứ Hai", "Thứ Ba", "Thứ Tư",
+    "Thứ Năm", "Thứ Sáu", "Thứ Bảy"
   ];
 
   function updateSolarDate() {
@@ -122,7 +120,10 @@
     const T3 = T2 * T;
     const dr = Math.PI / 180;
     let Jd1 =
-      2415020.75933 + 29.53058868 * k + 0.0001178 * T2 - 0.000000155 * T3;
+      2415020.75933 +
+      29.53058868 * k +
+      0.0001178 * T2 -
+      0.000000155 * T3;
     Jd1 += 0.00033 * Math.sin((166.56 + 132.87 * T - 0.009173 * T2) * dr);
     const M = 359.2242 + 29.10535608 * k - 0.0000333 * T2 - 0.00000347 * T3;
     const Mpr = 306.0253 + 385.81691806 * k + 0.0107306 * T2 + 0.00001236 * T3;
@@ -133,14 +134,9 @@
     C1 -= 0.4068 * Math.sin(Mpr * dr) + 0.0161 * Math.sin(dr * 2 * Mpr);
     C1 -= 0.0004 * Math.sin(dr * 3 * Mpr);
     C1 += 0.0104 * Math.sin(dr * 2 * F) - 0.0051 * Math.sin(dr * (M + Mpr));
-    C1 -=
-      0.0074 * Math.sin(dr * (M - Mpr)) + 0.0004 * Math.sin(dr * (2 * F + M));
-    C1 -=
-      0.0004 * Math.sin(dr * (2 * F - M)) -
-      0.0006 * Math.sin(dr * (2 * F + Mpr));
-    C1 +=
-      0.001 * Math.sin(dr * (2 * F - Mpr)) +
-      0.0005 * Math.sin(dr * (2 * Mpr + M));
+    C1 -= 0.0074 * Math.sin(dr * (M - Mpr)) + 0.0004 * Math.sin(dr * (2 * F + M));
+    C1 -= 0.0004 * Math.sin(dr * (2 * F - M)) - 0.0006 * Math.sin(dr * (2 * F + Mpr));
+    C1 += 0.001 * Math.sin(dr * (2 * F - Mpr)) + 0.0005 * Math.sin(dr * (2 * Mpr + M));
     let deltat;
     if (T < -11) {
       deltat =
@@ -162,7 +158,8 @@
     const dr = Math.PI / 180;
     const M = 357.5291 + 35999.0503 * T - 0.0001559 * T2 - 0.00000048 * T * T2;
     const L0 = 280.46645 + 36000.76983 * T + 0.0003032 * T2;
-    let DL = (1.9146 - 0.004817 * T - 0.000014 * T2) * Math.sin(dr * M);
+    let DL =
+      (1.9146 - 0.004817 * T - 0.000014 * T2) * Math.sin(dr * M);
     DL +=
       (0.019993 - 0.000101 * T) * Math.sin(dr * 2 * M) +
       0.00029 * Math.sin(dr * 3 * M);
@@ -174,7 +171,7 @@
 
   function getSunLongitude(dayNumber, timeZone) {
     return Math.floor(
-      (SunLongitude(dayNumber - 0.5 - timeZone / 24) / Math.PI) * 6,
+      (SunLongitude(dayNumber - 0.5 - timeZone / 24) / Math.PI) * 6
     );
   }
 
@@ -245,32 +242,8 @@
     return [lunarDay, lunarMonth, lunarYear, lunarLeap];
   }
 
-  const CAN = [
-    "Giáp",
-    "Ất",
-    "Bính",
-    "Đinh",
-    "Mậu",
-    "Kỷ",
-    "Canh",
-    "Tân",
-    "Nhâm",
-    "Quý",
-  ];
-  const CHI = [
-    "Tý",
-    "Sửu",
-    "Dần",
-    "Mão",
-    "Thìn",
-    "Tỵ",
-    "Ngọ",
-    "Mùi",
-    "Thân",
-    "Dậu",
-    "Tuất",
-    "Hợi",
-  ];
+  const CAN = ["Giáp", "Ất", "Bính", "Đinh", "Mậu", "Kỷ", "Canh", "Tân", "Nhâm", "Quý"];
+  const CHI = ["Tý", "Sửu", "Dần", "Mão", "Thìn", "Tỵ", "Ngọ", "Mùi", "Thân", "Dậu", "Tuất", "Hợi"];
 
   function canChiYear(y) {
     return `${CAN[(y + 6) % 10]} ${CHI[(y + 8) % 12]}`;
@@ -282,7 +255,7 @@
       now.getDate(),
       now.getMonth() + 1,
       now.getFullYear(),
-      7,
+      7
     );
     const leapTxt = leap ? " (nhuận)" : "";
     document.getElementById("lunar-date").textContent =
@@ -317,7 +290,7 @@
       swingSpeed: 0.01 + Math.random() * 0.02,
       color: PETAL_COLORS[Math.floor(Math.random() * PETAL_COLORS.length)],
       rotation: Math.random() * Math.PI * 2,
-      rotSpeed: (Math.random() - 0.5) * 0.03,
+      rotSpeed: (Math.random() - 0.5) * 0.03
     };
   }
   for (let i = 0; i < PETAL_COUNT; i++) petals.push(makePetal());
@@ -345,12 +318,11 @@
       const angle = (Math.PI * 2 * i) / count;
       const speed = 1 + Math.random() * 2;
       particles.push({
-        x,
-        y,
+        x, y,
         vx: Math.cos(angle) * speed,
         vy: Math.sin(angle) * speed,
         life: 1,
-        color: hueColors[Math.floor(Math.random() * hueColors.length)],
+        color: hueColors[Math.floor(Math.random() * hueColors.length)]
       });
     }
     fireworks.push({ particles, age: 0 });
@@ -399,9 +371,7 @@
         }
       });
     });
-    fireworks = fireworks.filter((fw) =>
-      fw.particles.some((pt) => pt.life > 0),
-    );
+    fireworks = fireworks.filter((fw) => fw.particles.some((pt) => pt.life > 0));
 
     requestAnimationFrame(animate);
   }
